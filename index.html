@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Mods & Resource Packs Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0e110d',
+                            card: '#161a14',
+                            border: '#232a20',
+                            accent: '#62c353',
+                            'accent-hover': '#72d663',
+                            muted: '#808f7d',
+                            badge: '#1e261b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0d100c;
+            color: #d1dcd0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-3px);
+            border-color: #384734;
+            box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7), 0 0 15px -3px rgba(98, 195, 83, 0.15);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d100c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232a20;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #384734;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-brand-accent selection:text-black antialiased">
+
+    <div>
+        <header class="border-b border-brand-border/60 bg-brand-dark/80 backdrop-blur-md sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-brand-badge border border-brand-accent/30 flex items-center justify-center text-brand-accent font-bold">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-white text-base leading-tight">Bearbrand1828</h1>
+                        <p class="text-xs text-brand-muted font-mono">Mods & Resource Packs Showcase</p>
+                    </div>
+                </div>
+
+                <!-- Socials Tab Dropdown -->
+                <div class="relative" id="socialsContainer">
+                    <button onclick="toggleSocialsDropdown(event)" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-brand-card hover:bg-brand-border border border-brand-border text-brand-muted hover:text-white transition-colors text-xs font-mono">
+                        <i data-lucide="share-2" class="w-3.5 h-3.5 text-brand-accent"></i>
+                        <span>Socials</span>
+                        <i data-lucide="chevron-down" id="socialsChevron" class="w-3.5 h-3.5 text-brand-muted transition-transform duration-200"></i>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="socialsDropdown" class="hidden absolute right-0 mt-2 w-48 bg-brand-card border border-brand-border rounded-xl shadow-2xl overflow-hidden z-50 p-1.5">
+                        <a href="https://www.tiktok.com/@bearbrand1828" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-brand-muted hover:text-white hover:bg-brand-border transition-colors">
+                            <i data-lucide="youtube" class="w-4 h-4 text-red-400"></i>
+                            <span class="font-medium">TikTok</span>
+                            <i data-lucide="external-link" class="w-3 h-3 ml-auto opacity-50"></i>
+                        </a>
+                        <a href="https://github.com/gvxlcsz" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs text-brand-muted hover:text-white hover:bg-brand-border transition-colors">
+                            <i data-lucide="github" class="w-4 h-4 text-white"></i>
+                            <span class="font-medium">GitHub</span>
+                            <i data-lucide="external-link" class="w-3 h-3 ml-auto opacity-50"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Search, Filter & View Toggle Controls -->
+            <div class="mb-10 flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between bg-brand-card/50 p-4 rounded-xl border border-brand-border/60">
+                <div class="relative flex-1">
+                    <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-brand-muted"></i>
+                    <input type="text" id="searchInput" oninput="handleFilter()" placeholder="Search mods, resource packs, categories..." class="w-full bg-brand-dark border border-brand-border rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-brand-muted/60 focus:outline-none focus:border-brand-accent transition-colors">
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-3 flex-wrap">
+                    <!-- Category Filters -->
+                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 font-mono text-xs">
+                        <button onclick="setCategoryFilter('all')" class="cat-btn active border px-3 py-1.5 rounded-md transition-colors bg-brand-accent text-black font-semibold border-brand-accent" data-cat="all">ALL</button>
+                        <button onclick="setCategoryFilter('mods')" class="cat-btn border border-brand-border bg-brand-dark text-brand-muted hover:text-white px-3 py-1.5 rounded-md transition-colors" data-cat="mods">MODS</button>
+                        <button onclick="setCategoryFilter('resource-packs')" class="cat-btn border border-brand-border bg-brand-dark text-brand-muted hover:text-white px-3 py-1.5 rounded-md transition-colors" data-cat="resource-packs">RESOURCE PACKS</button>
+                    </div>
+
+                    <!-- Layout View Switcher -->
+                    <div class="flex items-center bg-brand-dark border border-brand-border p-1 rounded-lg gap-1">
+                        <button id="viewGridBtn" onclick="setLayoutView('grid')" class="p-1.5 rounded text-brand-accent bg-brand-card transition-colors" title="Grid View">
+                            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                        </button>
+                        <button id="viewListBtn" onclick="setLayoutView('list')" class="p-1.5 rounded text-brand-muted hover:text-white transition-colors" title="List View">
+                            <i data-lucide="list" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast Notification -->
+            <div id="toast" class="fixed bottom-6 right-6 z-50 bg-brand-accent text-black font-medium text-sm px-4 py-2.5 rounded-lg shadow-xl flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+                <span id="toastMsg">Copied to clipboard!</span>
+            </div>
+
+            <section id="modsSection" class="mb-14">
+                <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border/40">
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Mods</h2>
+                            <span class="mono-font text-xs bg-brand-badge text-brand-accent border border-brand-accent/20 px-2 py-0.5 rounded font-medium" id="modsCount">--</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1">Little additions that change how the game plays.</p>
+                    </div>
+                </div>
+
+                <!-- Mods Grid/List Container -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modsGrid">
+                    <div class="col-span-full text-center py-12 text-brand-muted animate-pulse">Loading mods from Modrinth...</div>
+                </div>
+            </section>
+
+            <section id="packsSection" class="mb-14">
+                <div class="flex items-center justify-between mb-6 pb-2 border-b border-brand-border/40">
+                    <div>
+                        <div class="flex items-center gap-2.5">
+                            <h2 class="text-2xl font-bold text-white tracking-tight">Resource packs</h2>
+                            <span class="mono-font text-xs bg-brand-badge text-brand-accent border border-brand-accent/20 px-2 py-0.5 rounded font-medium" id="packsCount">--</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-brand-muted mt-1">A new look for familiar blocks, creatures and places.</p>
+                    </div>
+                </div>
+
+                <!-- Resource Packs Grid/List Container -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="packsGrid">
+                    <div class="col-span-full text-center py-12 text-brand-muted animate-pulse">Loading resource packs from Modrinth...</div>
+                </div>
+            </section>
+
+            <!-- Empty Search State -->
+            <div id="noResults" class="hidden text-center py-16 border border-dashed border-brand-border rounded-xl">
+                <i data-lucide="package-x" class="w-10 h-10 mx-auto text-brand-muted mb-3 opacity-50"></i>
+                <h3 class="text-white font-medium mb-1">No items match your search</h3>
+                <p class="text-xs text-brand-muted">Try typing something else or clear the filter.</p>
+                <button onclick="resetFilters()" class="mt-4 px-3 py-1.5 text-xs font-mono bg-brand-border text-white rounded-md hover:bg-brand-accent hover:text-black transition-colors">Reset Filters</button>
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-t border-brand-border/60 bg-brand-dark py-8 text-center text-xs text-brand-muted">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>Designed for Mods and Resourcepacks</p>
+            <p class="mono-font text-[11px] text-brand-muted/70">Minecraft is a trademark of Mojang Synergies AB</p>
+        </div>
+    </footer>
+
+    <!-- Item Details Modal -->
+    <div id="itemModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div class="bg-brand-card border border-brand-border max-w-lg w-full rounded-xl overflow-hidden shadow-2xl transform scale-95 transition-transform duration-200" id="modalContainer">
+            <div class="relative h-48 bg-brand-dark flex items-center justify-center p-6">
+                <img id="modalImg" src="" alt="" class="max-h-full max-w-full object-contain">
+                <button onclick="closeModal()" class="absolute top-3 right-3 p-1.5 rounded-full bg-black/60 text-white hover:bg-black transition-colors">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+                <span id="modalBadge" class="absolute top-3 left-3 mono-font text-[10px] bg-black/70 border border-white/10 px-2 py-0.5 rounded text-white uppercase">MODRINTH</span>
+            </div>
+            <div class="p-6">
+                <span id="modalCategory" class="mono-font text-[11px] text-brand-accent tracking-wider uppercase font-semibold">CATEGORY</span>
+                <h3 id="modalTitle" class="text-xl font-bold text-white mt-1 mb-2">Item Title</h3>
+                <p id="modalDesc" class="text-sm text-brand-muted leading-relaxed mb-6">Detailed description goes here...</p>
+                
+                <div class="flex items-center gap-3">
+                    <a id="modalDownloadLink" href="#" target="_blank" class="flex-1 flex items-center justify-center gap-2 bg-brand-accent hover:bg-brand-accent-hover text-black font-semibold text-xs py-2.5 px-4 rounded-lg transition-colors">
+                        <span>Creator's Download Page</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                    <button onclick="copyModalLink()" class="p-2.5 rounded-lg border border-brand-border hover:bg-brand-border text-brand-muted hover:text-white transition-colors" title="Copy Direct Link">
+                        <i data-lucide="share-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simply edit these arrays with your Modrinth slugs!
+        const myModSlugs = [
+            // Image 1
+            'a-good-place',             // a_good_place-26.2-1.3.9-fabric.jar
+            'accurate-block-placement', // AccurateBlockPlacement-Reborn-1.4.6+...jar
+            'animatica',                // animatica-0.6.3+26.2.jar
+            'appleskin',                // appleskin-fabric-mc26.2-3.0.10.jar
+            'better-block-entities',    // bbe-fabric-1.3.8-beta.1+mc26.2.jar
+            'bettergrassify',           // BetterGrassify-1.8.7+fabric.26.2.jar
+            'better-mount-hud',         // bettermounthud-1.3.1.jar
+            'bookshelf',                // Bookshelf-fabric-MC26.2-26.2.0.4.jar
+            'cape-provider',            // cape-provider-5.5.0.jar
+            'cloth-config',             // cloth-config-26.2.155.jar
+            'collective',               // collective-26.2.0-8.41.jar
+            'configmanager',            // ConfigManager-fabric-26.1_26.2-1.1.3.jar
+            'continuity',               // continuity-3.0.1+26.2.jar
+            'controlify',               // controlify-3.5.0+mc26.2-universal.jar
+            'crash-assistant',          // CrashAssistant-fabric-26.2-1.11.12.jar
+            'cubes-without-borders',    // cwb-4.1.0+26.2.jar
+            'debugify',                 // debugify-26.2.0.0.jar
+            'dynamic-fps',              // dynamic-fps-3.11.9+minecraft-26.2.0-fab...jar
+            'e4mc',                     // e4mc-fabric-6.2.1-modern.jar
+            'entity_model_features',    // entity_model_features-3.3.8-26.2-fabric.jar
+            'entity_texture_features',  // entity_texture_features-7.2.4-26.2-fabric.jar
+            'entityculling',            // entityculling-fabric-1.10.5-mc26.2.jar
+            'fabric-api',               // fabric-api-0.161.0+26.2.jar
+
+            // Image 2
+            'fabric-language-kotlin',   // fabric-language-kotlin-1.14.1+kotlin.2.4.2...
+            'fastquit',                 // fastquit-3.1.5+mc26.2.jar
+            'ferrite-core',             // ferritecore-9.0.0-fabric.jar
+            'forge-config-api-port',    // ForgeConfigAPIPort-v26.2.1-mc26.2.x-Fab...
+            'freecam',                  // freecam-fabric-1.4.1+mc26.2.jar
+            'fullbrightness-toggle',    // fullbrightnesstoggle-26.2.0-4.7.jar
+            'immediatelyfast',          // ImmediatelyFast-Fabric-1.16.4+26.2.jar
+            'inventory-profiles-next',  // InventoryProfilesNext-fabric-26.2-2.3.8.jar
+            'iris',                     // iris-fabric-1.11.4+mc26.2.jar
+            'lxeris',                   // lxeris-4.6.5+26.2-fabric.jar
+            'jade',                     // Jade-mc26.2-Fabric-26.2.11.jar
+            'lambdynamiclights',        // lambdynamiclights-4.12.4+26.2.jar
+            'language-reload',          // language-reload-1.7.7+26.2.jar
+            'libipn',                   // libIPN-fabric-26.2-6.9.0.jar
+            'litematica',               // litematica-fabric-26.2-0.28.8.jar
+            'lithium',                  // lithium-fabric-0.25.3+mc26.2.jar
+            'main-menu-credits',        // main-menu-credits-1.4.0+26.2-universal.j...
+            'malilib',                  // malilib-fabric-26.2-0.29.6.jar
+            'mixintrace',               // mixintrace-1.0-26.1-universal.jar
+            'modernfix',                // modernfix-5.27.19-build.1.jar
+            'modmenu',                  // modmenu-20.0.3.jar
+            'morechathistory',          // morechathistory-2.0.0.jar
+
+            // Image 3
+            'moreculling',              // moreculling-fabric-26.2-1.8.1.jar
+            'mouse-tweaks',             // MouseTweaks-fabric-mc26.2-2.31.jar
+            'no-chat-reports',          // NoChatReports-FABRIC-26.2-v2.20.2.jar
+            'not-enough-animations',    // notenoughanimations-fabric-1.12.5-mc2...
+            'optigui',                  // optigui-2.3.0-beta.10+26.2.jar
+            'paginated-advancements',   // paginatedadvancements-2.8.0+26.2.jar
+            'placeholder-api',          // placeholder-api-3.1.0-beta.1+26.2.jar
+            'polytone',                 // polytone-26.2-6.7.0-fabric.jar
+            'punchy',                   // punchy-2.8c-fabric-26.2.jar
+            'puzzle',                   // puzzle-fabric-2.3.1+26.2.jar
+            'reeses-sodium-options',    // reeses-sodium-options-fabric-2.2.3+mc2...
+            'renice-shot',              // renice-shot-1.0.0+mc26.2.jar
+            'rrls',                     // rrls-5.2.8+mc.26.2.jar
+            '3dskinlayers',             // skinlayers3d-fabric-1.11.3-mc26.2.jar
+            'skyboxify',                // skyboxify-3.3.1+26.2-fabric.jar
+            'sodium-extra',             // sodium-extra-fabric-0.9.3+mc26.2.jar
+            'sodium',                   // sodium-fabric-0.9.2+mc26.2.jar
+            'sodium-shadowy-path-blocks', // sodium-shadowy-path-blocks-fabric-7.0....
+            'sound-physics-remastered', // sound-physics-remastered-fabric-1.5.1+2...
+            'simple-voice-chat',        // voicechat-fabric-2.6.22+26.2.jar
+            'yacl',                     // yet_another_config_lib_v3-3.9.7+26.2-fab...
+            'zoomify'                   // zoomify-2.16.3+26.2.jar
+        ];
+        const myPackSlugs = [
+            'dramatic-skys',            // Dramatic Skys Demo 1.5.3.36.6
+            'enchantment-outlines',     // enchant-icons-26.2-v1.3
+            'enchantment-outlines',     // Enchantment Outlines
+            'evenbetterenchants',       // EvenBetterEnchants_v3_1.21.5+
+            'fresh-animations',         // FA+All_Extensions-v1.9.2 / FreshAnimations_v1.10.5
+            'fancy-crops',              // Fancy Crops v1.3
+            'icons',                    // Icons v.1.14
+            'low-shields',              // Low Shield
+            'low-on-fire',              // LowOnFire v26.2
+            'new-glowing-ores',         // NewGlowingOres
+            'round-trees',              // Round-Trees-8.4
+            'unique-dark',              // Unique Dark - Lite
+            'tools-and-utils'           // Weskerson's 3D Items
+        ];
+
+        let mods = [];
+        let resourcePacks = [];
+
+        let activeCategory = 'all';
+        let currentLayoutView = 'grid';
+        let currentModalItem = null;
+
+        // Socials Dropdown Handler
+        function toggleSocialsDropdown(event) {
+            event.stopPropagation();
+            const dropdown = document.getElementById('socialsDropdown');
+            const chevron = document.getElementById('socialsChevron');
+            
+            const isHidden = dropdown.classList.contains('hidden');
+            if (isHidden) {
+                dropdown.classList.remove('hidden');
+                chevron.classList.add('rotate-180');
+            } else {
+                dropdown.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            const container = document.getElementById('socialsContainer');
+            const dropdown = document.getElementById('socialsDropdown');
+            const chevron = document.getElementById('socialsChevron');
+            
+            if (container && !container.contains(e.target)) {
+                dropdown.classList.add('hidden');
+                chevron.classList.remove('rotate-180');
+            }
+        });
+
+        // Fetch data automatically from Modrinth API
+        async function fetchModrinthProject(slug) {
+            try {
+                const response = await fetch(`https://api.modrinth.com/v2/project/${slug}`);
+                if (!response.ok) return null;
+                const data = await response.json();
+                
+                return {
+                    id: data.id,
+                    title: data.title,
+                    category: data.categories[0]?.toUpperCase() || 'GENERAL',
+                    description: data.description || 'No description provided.',
+                    badge: data.client_side === 'required' ? 'CLIENT' : 'MOD',
+                    image: data.icon_url || `https://placehold.co/600x350/161a14/62c353?text=${encodeURIComponent(data.title)}`,
+                    downloadUrl: `https://modrinth.com/${data.project_type}/${data.slug}`
+                };
+            } catch (err) {
+                console.error(`Error fetching Modrinth project ${slug}:`, err);
+                return null;
+            }
+        }
+
+        async function loadAllProjects() {
+            const loadedMods = await Promise.all(myModSlugs.map(fetchModrinthProject));
+            const loadedPacks = await Promise.all(myPackSlugs.map(fetchModrinthProject));
+
+            mods = loadedMods.filter(m => m !== null);
+            resourcePacks = loadedPacks.filter(p => p !== null);
+
+            renderItems();
+        }
+
+        function createCardHtml(item) {
+            if (currentLayoutView === 'list') {
+                return `
+                    <div onclick="openModalById('${item.id}')" class="card-hover cursor-pointer bg-brand-card border border-brand-border rounded-xl overflow-hidden flex flex-col sm:flex-row items-stretch sm:items-center justify-between p-4 gap-4 group">
+                        <div class="flex items-center gap-4 flex-1 min-w-0">
+                            <div class="relative w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-brand-dark p-2 flex items-center justify-center">
+                                <img 
+                                    src="${item.image}" 
+                                    alt="${item.title}" 
+                                    class="max-w-full max-h-full object-contain group-hover:scale-110 transition-transform duration-300"
+                                >
+                            </div>
+                            <div class="min-w-0 flex-1">
+                                <span class="mono-font text-[10px] text-brand-accent tracking-wider uppercase font-medium block mb-0.5">
+                                    ${item.category}
+                                </span>
+                                <h3 class="text-base font-bold text-white group-hover:text-brand-accent transition-colors truncate">
+                                    ${item.title}
+                                </h3>
+                                <p class="text-xs text-brand-muted leading-relaxed line-clamp-2 mt-0.5">
+                                    ${item.description}
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 self-end sm:self-center shrink-0">
+                            <a 
+                                href="${item.downloadUrl}" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-1.5 text-xs font-semibold bg-brand-dark hover:bg-brand-border border border-brand-border px-3 py-2 rounded-lg text-brand-accent hover:text-white transition-colors group/link"
+                                onclick="event.stopPropagation()"
+                            >
+                                <span>Download</span>
+                                <i data-lucide="external-link" class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div onclick="openModalById('${item.id}')" class="card-hover cursor-pointer bg-brand-card border border-brand-border rounded-xl overflow-hidden flex flex-col justify-between group">
+                    <div>
+                        <!-- Thumbnail Header -->
+                        <div class="relative h-44 overflow-hidden bg-brand-dark flex items-center justify-center p-6">
+                            <img 
+                                src="${item.image}" 
+                                alt="${item.title}" 
+                                class="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-300"
+                            >
+                            <span class="absolute top-2.5 left-2.5 mono-font text-[10px] bg-black/80 border border-white/10 px-2 py-0.5 rounded text-white tracking-wider font-semibold">
+                                ${item.badge}
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5">
+                            <span class="mono-font text-[11px] text-brand-accent tracking-wider uppercase font-medium block mb-1">
+                                ${item.category}
+                            </span>
+                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">
+                                ${item.title}
+                            </h3>
+                            <p class="text-xs text-brand-muted leading-relaxed line-clamp-3">
+                                ${item.description}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Action Link -->
+                    <div class="p-5 pt-0 mt-auto">
+                        <a 
+                            href="${item.downloadUrl}" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 text-xs font-semibold text-brand-accent hover:text-brand-accent-hover transition-colors py-1 group/link"
+                            onclick="event.stopPropagation()"
+                        >
+                            <span>Creator's download page</span>
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"></i>
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function setLayoutView(view) {
+            currentLayoutView = view;
+            
+            const gridBtn = document.getElementById('viewGridBtn');
+            const listBtn = document.getElementById('viewListBtn');
+
+            if (view === 'grid') {
+                gridBtn.className = 'p-1.5 rounded text-brand-accent bg-brand-card transition-colors';
+                listBtn.className = 'p-1.5 rounded text-brand-muted hover:text-white transition-colors';
+            } else {
+                listBtn.className = 'p-1.5 rounded text-brand-accent bg-brand-card transition-colors';
+                gridBtn.className = 'p-1.5 rounded text-brand-muted hover:text-white transition-colors';
+            }
+
+            const modsGrid = document.getElementById('modsGrid');
+            const packsGrid = document.getElementById('packsGrid');
+
+            if (view === 'list') {
+                modsGrid.className = 'flex flex-col gap-3';
+                packsGrid.className = 'flex flex-col gap-3';
+            } else {
+                modsGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+                packsGrid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+            }
+
+            renderItems();
+        }
+
+        function openModalById(id) {
+            const item = mods.find(m => m.id === id) || resourcePacks.find(p => p.id === id);
+            if (item) openModal(item);
+        }
+
+        function renderItems() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase().trim();
+
+            const filteredMods = mods.filter(m => 
+                (activeCategory === 'all' || activeCategory === 'mods') &&
+                (m.title.toLowerCase().includes(searchQuery) || m.category.toLowerCase().includes(searchQuery) || m.description.toLowerCase().includes(searchQuery))
+            );
+
+            const filteredPacks = resourcePacks.filter(p => 
+                (activeCategory === 'all' || activeCategory === 'resource-packs') &&
+                (p.title.toLowerCase().includes(searchQuery) || p.category.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery))
+            );
+
+            const modsSection = document.getElementById('modsSection');
+            const packsSection = document.getElementById('packsSection');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredMods.length > 0 && activeCategory !== 'resource-packs') {
+                modsSection.classList.remove('hidden');
+                document.getElementById('modsGrid').innerHTML = filteredMods.map(createCardHtml).join('');
+                document.getElementById('modsCount').innerText = String(filteredMods.length).padStart(2, '0');
+            } else {
+                modsSection.classList.add('hidden');
+            }
+
+            if (filteredPacks.length > 0 && activeCategory !== 'mods') {
+                packsSection.classList.remove('hidden');
+                document.getElementById('packsGrid').innerHTML = filteredPacks.map(createCardHtml).join('');
+                document.getElementById('packsCount').innerText = String(filteredPacks.length).padStart(2, '0');
+            } else {
+                packsSection.classList.add('hidden');
+            }
+
+            if (filteredMods.length === 0 && filteredPacks.length === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+
+            lucide.createIcons();
+        }
+
+        function handleFilter() {
+            renderItems();
+        }
+
+        function setCategoryFilter(category) {
+            activeCategory = category;
+            
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === category) {
+                    btn.className = 'cat-btn active border px-3 py-1.5 rounded-md transition-colors bg-brand-accent text-black font-semibold border-brand-accent';
+                } else {
+                    btn.className = 'cat-btn border border-brand-border bg-brand-dark text-brand-muted hover:text-white px-3 py-1.5 rounded-md transition-colors';
+                }
+            });
+
+            renderItems();
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            setCategoryFilter('all');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+            }
+        }
+
+        function openModal(item) {
+            currentModalItem = item;
+            document.getElementById('modalImg').src = item.image;
+            document.getElementById('modalBadge').innerText = item.badge;
+            document.getElementById('modalCategory').innerText = item.category;
+            document.getElementById('modalTitle').innerText = item.title;
+            document.getElementById('modalDesc').innerText = item.description;
+            document.getElementById('modalDownloadLink').href = item.downloadUrl;
+
+            const modal = document.getElementById('itemModal');
+            const container = document.getElementById('modalContainer');
+            
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('itemModal');
+            const container = document.getElementById('modalContainer');
+            
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function copyModalLink() {
+            if (currentModalItem) {
+                copyToClipboard(currentModalItem.downloadUrl);
+                showToast(`Link for ${currentModalItem.title} copied!`);
+            }
+        }
+
+        window.onload = function() {
+            loadAllProjects();
+        };
+    </script>
+</body>
+</html>
